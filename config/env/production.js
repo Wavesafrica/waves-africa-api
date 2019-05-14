@@ -149,7 +149,7 @@ module.exports = {
     ***************************************************************************/
     cors: {
       allowOrigins: [
-        'https://waves-africa-api.herokuapp.com/',
+        'https://waves-africa-api.herokuapp.com',
       ]
     },
 
