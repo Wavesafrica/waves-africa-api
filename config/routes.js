@@ -9,5 +9,5 @@
  */
 
 module.exports.routes = {
-    'post 882077706:AAFyPuTfQulvjdTDfTb4q2MZ1HVWMkrQYBM': 'bot/index'
+    'post 882077706AAFyPuTfQulvjdTDfTb4q2MZ1HVWMkrQYBM': 'bot/index'
 };
