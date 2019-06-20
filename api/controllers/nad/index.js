@@ -19,12 +19,21 @@ module.exports = async function index(req, res) {
     axios.get('https://min-api.cryptocompare.com/data/price?fsym=WAVES&tsyms=USD', config),
     axios.get('https://free.currconv.com/api/v7/convert?q=USD_NAD&compact=ultra&apiKey=3ea8e1b98e3f3fb48b2e')
   ]).then(axios.spread((waves, currency) => {
-    const price = waves.data.USD * currency.data.USD_NAD;
+    var price = waves.data.USD * currency.data.USD_NAD;
+
+    const data = req.allParams();
+
+    var amount = data.amount || 1;
+
+    if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
+      price = price * parseFloat(amount);
+    }
+
     res.status(200).json({WAVES_NAD: price.toFixed(2)});
   }))
   .catch(error => {
     sails.log(error);
-    res.status(500).json({message: "Something went wrong and it's not your fault"});
+    res.status(500).json({message: 'Something went wrong and it\'s not your fault'});
   });
 
 };

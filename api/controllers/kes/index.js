@@ -19,7 +19,16 @@ module.exports = async function index(req, res) {
     axios.get('https://min-api.cryptocompare.com/data/price?fsym=WAVES&tsyms=USD', config),
     axios.get('https://free.currconv.com/api/v7/convert?q=USD_KES&compact=ultra&apiKey=3ea8e1b98e3f3fb48b2e')
   ]).then(axios.spread((waves, currency) => {
-    const price = waves.data.USD * currency.data.USD_KES;
+    var price = waves.data.USD * currency.data.USD_KES;
+
+    const data = req.allParams();
+
+    var amount = data.amount || 1;
+
+    if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
+      price = price * parseFloat(amount);
+    }
+
     res.status(200).json({WAVES_KES: price.toFixed(2)});
   }))
   .catch(error => {

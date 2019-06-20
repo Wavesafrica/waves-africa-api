@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /**
  * Route Mappings
  * (sails.config.routes)
