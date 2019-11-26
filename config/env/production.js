@@ -184,8 +184,9 @@ module.exports = {
     * > (For a full list, see https://sailsjs.com/plugins/sessions)            *
     *                                                                          *
     ***************************************************************************/
-    // adapter: '@sailshq/connect-redis',
-    // url: 'redis://user:password@localhost:6379/databasenumber',
+    adapter: '@sailshq/connect-redis',
+    url: process.env.REDISCLOUD_URL || 'redis://rediscloud:5nKMtGgVITXSfVEPLYy7P2RIoFnDYzri@redis-12267.c9.us-east-1-2.ec2.cloud.redislabs.com:12267',
+
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
     // ||   set sensitive credentials like this using an environment variable.
