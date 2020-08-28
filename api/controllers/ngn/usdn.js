@@ -17,7 +17,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      const price = await sails.helpers.getUsdnPrice.with({
+      const price = await sails.helpers.getCurrencyEquivalentOfUsd.with({
         amount: inputs.amount,
         currencyCode: "NGN",
       });

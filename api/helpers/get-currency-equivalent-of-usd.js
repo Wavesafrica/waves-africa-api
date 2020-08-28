@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 module.exports = {
-  friendlyName: "Get usdn price",
+  friendlyName: "Get currency equivalent of USD",
 
   description: "",
 
@@ -10,6 +10,7 @@ module.exports = {
     },
     currencyCode: {
       type: "string",
+      required: true,
     },
   },
 
@@ -34,7 +35,7 @@ module.exports = {
       if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
         price = price * parseFloat(amount);
       }
-      exits.success({ USDN_NGN: price });
+      exits.success(price);
     } catch (error) {
       throw error;
     }
