@@ -15,7 +15,7 @@ module.exports = {
     },
   },
 
-  fn: async function (inputs) {
+  fn: async function (inputs, exits) {
     try {
       const price = await sails.helpers.getWavesPriceInCurrency.with({
         amount: inputs.amount,
