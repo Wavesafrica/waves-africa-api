@@ -1,4 +1,4 @@
-const axios = require("axios");
+const fetch = require("node-fetch");
 module.exports = {
   friendlyName: "Usdn",
 
@@ -18,10 +18,12 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      const response = await axios.get(
+      const response = await fetch(
         "https://free.currconv.com/api/v7/convert?q=USD_NGN&compact=ultra&apiKey=3ea8e1b98e3f3fb48b2e"
       );
-      let price = response.data.USD_NGN;
+      const jsonResponse = await response.json();
+      sails.log(jsonResponse);
+      let price = jsonResponse.USD_NGN;
       const amount = inputs.amount || 1;
       if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
         price = price * parseFloat(amount);

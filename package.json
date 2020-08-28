@@ -7,7 +7,8 @@
   "dependencies": {
     "@sailshq/connect-redis": "^3.2.1",
     "@sailshq/lodash": "^3.10.3",
-    "axios": "^0.18.1",
+    "axios": "^0.20.0",
+    "node-fetch": "^2.6.0",
     "sails": "^1.2.5",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0"
