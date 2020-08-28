@@ -42,11 +42,12 @@ module.exports = {
       );
       var price = wavesPriceInDollar.USD * currencyEquivalentInUsd;
 
-      var amount = inputs.amount || 1;
+      var amount =
+        !_.isUndefined(inputs.amount) && !isNaN(Number(inputs.amount))
+          ? inputs.amount
+          : 1;
 
-      if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
-        price = price * parseFloat(amount);
-      }
+      price = price * parseFloat(amount);
       exits.success(price.toFixed(2));
     } catch (error) {
       throw error;

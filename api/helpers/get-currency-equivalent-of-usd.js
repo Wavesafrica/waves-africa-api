@@ -32,10 +32,13 @@ module.exports = {
       const jsonResponse = await response.json();
       const key = `USD_${inputs.currencyCode}`;
       let price = jsonResponse[key];
-      const amount = inputs.amount || 1;
-      if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
-        price = price * parseFloat(amount);
-      }
+      var amount =
+        !_.isUndefined(inputs.amount) && !isNaN(Number(inputs.amount))
+          ? inputs.amount
+          : 1;
+
+      price = price * parseFloat(amount);
+
       exits.success(price.toFixed(2));
     } catch (error) {
       throw error;
