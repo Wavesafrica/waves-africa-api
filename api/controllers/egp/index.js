@@ -1,41 +1,40 @@
-/**
- * Module dependencies
- */
+module.exports = {
+  friendlyName: "Index",
 
-const axios = require('axios');
+  description: "Index EGP.",
 
-// ...
+  inputs: {
+    amount: {
+      type: "number",
+    },
+  },
 
+  exits: {
+    operationalError: {
+      statusCode: 400,
+    },
+  },
 
-/**
- * egp/index.js
- *
- * Index egp.
- */
-module.exports = async function index(req, res) {
-  const config = {
-    headers: {'Authorization': 'Apikey ee05c52992071556a818f4f0b2c08d21f9cc815afb499e65bbfd34a220ae0cd7'}
-  };
-  axios.all([
-    axios.get('https://min-api.cryptocompare.com/data/price?fsym=WAVES&tsyms=USD', config),
-    axios.get('https://free.currconv.com/api/v7/convert?q=USD_EGP&compact=ultra&apiKey=3ea8e1b98e3f3fb48b2e')
-  ]).then(axios.spread((waves, currency) => {
-    var price = waves.data.USD * currency.data.USD_EGP;
+  fn: async function (inputs) {
+    try {
+      const price = await sails.helpers.getWavesPriceInCurrency.with({
+        amount: inputs.amount,
+        currencyCode: "EGP",
+      });
 
-    const data = req.allParams();
-
-    var amount = data.amount || 1;
-
-    if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
-      price = price * parseFloat(amount);
+      exits.success({ WAVES_EGP: price });
+    } catch (error) {
+      sails.log(error);
+      if (error.isOperationalError) {
+        return exits.operationalError({
+          message: "Something went wrong",
+          error: error.raw,
+        });
+      }
+      return exits.error({
+        message: "Something went wrong",
+        error: error.message,
+      });
     }
-
-    res.status(200).json({WAVES_EGP: price.toFixed(2)});
-  }))
-  .catch(error => {
-    sails.log(error);
-    res.status(500).json({message: "Something went wrong and it's not your fault"});
-  });
-
-
+  },
 };
