@@ -10,4 +10,6 @@
  */
 
 module.exports.routes = {
+  "GET /ngn": "ngn/index",
+  "GET /ngn/usdn": "ngn/usdn",
 };
