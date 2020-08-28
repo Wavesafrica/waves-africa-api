@@ -14,6 +14,7 @@ module.exports.routes = {
   "GET /dzd": "dzd/index",
   "GET /egp": "egp/index",
   "GET /ghs": "ghs/index",
+  "GET /kes": "kes/index",
   "GET /lyd": "lyd/index",
   "GET /nad": "nad/index",
   "GET /ngn": "ngn/index",
