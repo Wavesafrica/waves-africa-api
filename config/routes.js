@@ -10,6 +10,7 @@
  */
 
 module.exports.routes = {
+  "GET /": "home/index",
   "GET /dzd": "dzd/index",
   "GET /egp": "egp/index",
   "GET /ghs": "ghs/index",
