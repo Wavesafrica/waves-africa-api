@@ -22,8 +22,6 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      const freeCurApiKey =
-        sails.config.freeCurApiKey || process.env.FREE_CUR_API_KEY;
       const cryptoCompareApiKey =
         sails.config.cryptoCompareApiKey || process.env.CRYPTO_COMPARE_API_KEY;
       const cryptoCompareHeader = {
@@ -42,7 +40,6 @@ module.exports = {
           currencyCode: inputs.currencyCode,
         }
       );
-
       var price = wavesPriceInDollar.USD * currencyEquivalentInUsd;
 
       var amount = inputs.amount || 1;
@@ -50,7 +47,6 @@ module.exports = {
       if (!_.isUndefined(amount) && !isNaN(Number(amount))) {
         price = price * parseFloat(amount);
       }
-
       exits.success(price.toFixed(2));
     } catch (error) {
       throw error;
