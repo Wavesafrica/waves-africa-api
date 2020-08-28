@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: "Index",
 
-  description: "Index egp.",
+  description: "Index EGP.",
 
   inputs: {
     amount: {

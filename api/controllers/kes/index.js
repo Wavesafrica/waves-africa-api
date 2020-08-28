@@ -1,7 +1,7 @@
 module.exports = {
   friendlyName: "Index",
 
-  description: "Index lyd.",
+  description: "Index KES.",
 
   inputs: {
     amount: {
@@ -19,10 +19,10 @@ module.exports = {
     try {
       const price = await sails.helpers.getWavesPriceInCurrency.with({
         amount: inputs.amount,
-        currencyCode: "LYD",
+        currencyCode: "KES",
       });
 
-      exits.success({ WAVES_LYD: price });
+      exits.success({ WAVES_KES: price });
     } catch (error) {
       sails.log(error);
       if (error.isOperationalError) {
