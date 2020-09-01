@@ -32,10 +32,7 @@ module.exports = {
       const jsonResponse = await response.json();
       const key = `USD_${inputs.currencyCode}`;
       let price = jsonResponse[key];
-      var amount =
-        !_.isUndefined(inputs.amount) && !isNaN(Number(inputs.amount))
-          ? inputs.amount
-          : 1;
+      var amount = sails.helpers.getAmount(inputs.amount);
 
       price = price * parseFloat(amount);
 

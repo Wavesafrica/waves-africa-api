@@ -22,17 +22,7 @@ module.exports = {
 
   fn: async function (inputs, exits) {
     try {
-      const cryptoCompareApiKey =
-        sails.config.cryptoCompareApiKey || process.env.CRYPTO_COMPARE_API_KEY;
-      const cryptoCompareHeader = {
-        headers: { Authorization: `Apikey ${cryptoCompareApiKey}` },
-      };
-
-      const cryptoCompareResponse = await fetch(
-        "https://min-api.cryptocompare.com/data/price?fsym=WAVES&tsyms=USD",
-        cryptoCompareHeader
-      );
-      const wavesPriceInDollar = await cryptoCompareResponse.json();
+      const wavesPriceInDollar = await sails.helpers.getWavesPriceInUsd();
 
       const currencyEquivalentInUsd = await sails.helpers.getCurrencyEquivalentOfUsd.with(
         {
@@ -40,12 +30,9 @@ module.exports = {
           currencyCode: inputs.currencyCode,
         }
       );
-      var price = wavesPriceInDollar.USD * currencyEquivalentInUsd;
+      var price = wavesPriceInDollar * currencyEquivalentInUsd;
 
-      var amount =
-        !_.isUndefined(inputs.amount) && !isNaN(Number(inputs.amount))
-          ? inputs.amount
-          : 1;
+      var amount = sails.helpers.getAmount(inputs.amount);
 
       price = price * parseFloat(amount);
       exits.success(price.toFixed(2));
