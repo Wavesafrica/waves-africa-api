@@ -9,7 +9,7 @@
     "node-fetch": "^2.6.0",
     "sails": "^1.2.5",
     "sails-hook-orm": "^2.1.1",
-    "sails-hook-sockets": "^2.0.0"
+    "sails-hook-sockets": "^2.0.3"
   },
   "devDependencies": {
     "@sailshq/eslint": "^4.19.3"
